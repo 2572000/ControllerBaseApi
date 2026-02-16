@@ -1,0 +1,5 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@BaseUrl=https://localhost:7152
+
+
+GET {{BaseUrl}}/api/Products
