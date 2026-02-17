@@ -1,5 +1,13 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
 @BaseUrl=https://localhost:7152
 
+######OPtions  
+OPTIONS {{BaseUrl}}/api/Products
 
-GET {{BaseUrl}}/api/Products
+
+######HEAD  
+HEAD {{BaseUrl}}/api/Products/100
+
+
+######GEt  
+GET {{BaseUrl}}/api/Products/1
