@@ -56,7 +56,6 @@ namespace ControllerBaseApi.Controllers
             if(product == null) 
                 return NotFound();
 
-
             return Ok(ProductResponses.FromModel(product));
         }
     }
