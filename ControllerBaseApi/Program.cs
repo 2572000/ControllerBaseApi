@@ -1,4 +1,5 @@
 using ControllerBaseApi.Data;
+using System.Text.Json.Serialization;
 
 namespace ControllerBaseApi
 {
@@ -8,7 +9,11 @@ namespace ControllerBaseApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                });
             builder.Services.AddSingleton<ProductRepository>();
 
 

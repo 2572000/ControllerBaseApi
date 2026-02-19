@@ -1,4 +1,6 @@
 ﻿using ControllerBaseApi.Data;
+using ControllerBaseApi.Entities;
+using ControllerBaseApi.Request;
 using ControllerBaseApi.Responses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,5 +60,42 @@ namespace ControllerBaseApi.Controllers
 
             return Ok(ProductResponses.FromModel(product));
         }
+
+        [HttpGet]
+        public IActionResult Get(int page=1,int pageSize=10)
+        {
+            page = Math.Max(1,page);
+            pageSize = Math.Clamp(pageSize, 1, 100);
+
+            int count = _productRepository.TotalCount();
+
+            var products = _productRepository.GetProductsPage(page, pageSize);
+
+            var pageResult = PageResult<ProductResponses>.Create(
+                ProductResponses.FromModelList(products),
+                count,
+                page,
+                pageSize
+                );
+           return Ok(pageResult);
+
+
+        }
+
+        [HttpPost]
+        public IActionResult CreateProduct(CreateProductRequest request)
+        {
+            if(_productRepository.ExistsByName(request.Name!))
+                return Conflict("The Product With Yhis Name Is Already Exist!");
+
+            var product = new Product
+            {
+                Name = request.Name,
+                Price = request.Price,
+            };
+            _productRepository.AddProduct(product);
+            return Ok(product);
+        }
+
     }
 }

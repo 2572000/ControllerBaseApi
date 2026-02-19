@@ -11,3 +11,15 @@ HEAD {{BaseUrl}}/api/Products/100
 
 ######GEt  
 GET {{BaseUrl}}/api/Products/1
+
+######GEt  
+GET {{BaseUrl}}/api/Products?page=2&pageSize=4
+
+######Create Product
+POST {{BaseUrl}}/api/products
+Content-Type:application/json
+
+{
+  "name":"Keyboard",
+  "price":25.50
+}

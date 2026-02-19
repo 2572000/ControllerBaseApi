@@ -37,7 +37,7 @@ namespace ControllerBaseApi.Data
             var products = _products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             return products;
         }
-
+        public int TotalCount()=> _products.Count();    
         public Product? GetProductById(int id)
         {
             var product = _products.FirstOrDefault(p => p.Id == id);
@@ -98,7 +98,7 @@ namespace ControllerBaseApi.Data
         }
 
         public bool ExistsById(int id) => _products.Any(p => p.Id == id);
-        public bool ExistsByName(string name) => _products.Any(p => p.Name == name);
+        public bool ExistsByName(string name) => _products.Any(p => string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
     }
 }
 
